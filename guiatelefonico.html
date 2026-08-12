@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia Telefônico</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="theme-color" content="#128C7E">
+</head>
+<body>
+    <header>
+        <nav style="display:flex;align-items:center;gap:1rem;padding:1rem;">
+            <a href="index.html">Início</a>
+            <a href="blocodenotas.html">Bloco de Notas</a>
+            <a href="anotadas.html">Anotações</a>
+        </nav>
+        <div class="header-content">
+            <i class="fa-solid fa-address-book logo-icon"></i>
+            <h1>Contatos RH & Departamentos</h1>
+        </div>
+    </header>
+
+    <main id="app">
+        <!-- Benefícios -->
+        <section class="category">
+            <h2><i class="fa-solid fa-gift"></i> Benefícios</h2>
+            <div class="button-group">
+                <button onclick="zap('6230989060')">
+                    <span class="name">Ana Laura</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9060</span>
+                </button>
+                <button onclick="zap('6230989275')">
+                    <span class="name">Thaynara</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9275</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Contrato -->
+        <section class="category">
+            <h2><i class="fa-solid fa-file-contract"></i> Contrato</h2>
+            <div class="button-group">
+                <button onclick="zap('62995655762')">
+                    <span class="name">Leticia Coelho</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 99565-5762</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Rescisão -->
+        <section class="category">
+            <h2><i class="fa-solid fa-user-minus"></i> Rescisão</h2>
+            <div class="button-group">
+                <button onclick="zap('6230989201')">
+                    <span class="name">Aline Rocha</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9201</span>
+                </button>
+                <button onclick="zap('6230989190')">
+                    <span class="name">Thais Gonçalves</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9190</span>
+                </button>
+                <button onclick="zap('6230989118')">
+                    <span class="name">Thaysa Vieira</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9118</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Gestão de Jornada -->
+        <section class="category">
+            <h2><i class="fa-solid fa-clock"></i> Gestão de Jornada</h2>
+            <div class="button-group">
+                <button onclick="zap('6230989263')">
+                    <span class="name">Sadraque Silva</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9263</span>
+                </button>
+                <button onclick="zap('6230989006')">
+                    <span class="name">Tiago Leonardo</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9006</span>
+                </button>
+                <button onclick="zap('6230989118')">
+                    <span class="name">Vinicius Souza</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9118</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Trabalhista -->
+        <section class="category">
+            <h2><i class="fa-solid fa-scale-balanced"></i> Trabalhista</h2>
+            <div class="button-group">
+                <button onclick="zap('6230989288')">
+                    <span class="name">Bruna Mesquita</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9288</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Folha / Férias -->
+        <section class="category">
+            <h2><i class="fa-solid fa-money-bill-wave"></i> Folha / Férias</h2>
+            <div class="button-group">
+                <button onclick="zap('6230989251')">
+                    <span class="name">Ruth Pereira</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9251</span>
+                </button>
+                <button onclick="zap('6230989159')">
+                    <span class="name">Rodrigo Martins</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 3098-9159</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- Demais Contatos -->
+        <section class="category">
+            <h2><i class="fa-solid fa-phone-volume"></i> Demais Contatos</h2>
+            <div class="button-group">
+                <button onclick="zap('16996038838')">
+                    <span class="name">Ellen Andrade</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 16 99603-8838</span>
+                </button>
+                <button onclick="zap('6233133652')">
+                    <span class="name">Emergência</span>
+                    <span class="phone"><i class="fa-solid fa-phone"></i> 62 3313-3652</span>
+                </button>
+                <button onclick="zap('6284548644')">
+                    <span class="name">Garagem</span>
+                    <span class="phone"><i class="fa-solid fa-phone"></i> 62 8454-8644</span>
+                </button>
+                <button onclick="zap('6239026931')">
+                    <span class="name">SESC</span>
+                    <span class="phone"><i class="fa-solid fa-phone"></i> 62 3902-6931</span>
+                </button>
+                <button onclick="zap('08007285083')">
+                    <span class="name">PLUXEE</span>
+                    <span class="phone"><i class="fa-solid fa-phone"></i> 0800 728 5083</span>
+                </button>
+                <button onclick="zap('62999254227')">
+                    <span class="name">Rota - CAOA / CSC</span>
+                    <span class="phone"><i class="fa-brands fa-whatsapp"></i> 62 99925-4227</span>
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        function zap(numero) {
+            window.location.href = "https://wa.me/55" + numero;
+        }
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js');
+        }
+    </script>
+</body>
+</html>

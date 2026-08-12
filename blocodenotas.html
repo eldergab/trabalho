@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloco de Notas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header style="padding:1rem;display:flex;gap:1rem;align-items:center;">
+        <a href="index.html">Início</a>
+        <a href="guiatelefonico.html">Guia Telefônico</a>
+        <a href="anotadas.html">Anotações</a>
+    </header>
+
+    <main style="padding:1rem;">
+        <h1>Bloco de Notas</h1>
+        <p>Digite aqui os pontos importantes durante a integração. Você pode salvar como .txt e também salvar para ver depois em "Anotações".</p>
+
+        <textarea id="note" style="width:100%;height:300px;" placeholder="Escreva suas anotações aqui..."></textarea>
+        <div style="margin-top:1rem;display:flex;gap:0.5rem;">
+            <button id="downloadBtn">Salvar como .txt (baixar)</button>
+            <button id="storeBtn">Salvar nas Anotações</button>
+            <button id="clearBtn">Limpar</button>
+            <a href="anotadas.html"><button>Ver anotações salvas</button></a>
+        </div>
+    </main>
+
+    <script>
+        function timestamp() {
+            const d = new Date();
+            return d.toISOString();
+        }
+
+        function downloadText(filename, text) {
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        document.getElementById('downloadBtn').addEventListener('click', function() {
+            const text = document.getElementById('note').value;
+            if (!text) { alert('Nada para salvar'); return; }
+            const name = 'nota-' + (new Date()).toISOString().replace(/[:.]/g,'-') + '.txt';
+            downloadText(name, text);
+        });
+
+        document.getElementById('storeBtn').addEventListener('click', function() {
+            const text = document.getElementById('note').value.trim();
+            if (!text) { alert('Nada para salvar'); return; }
+            const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+            notes.push({ id: Date.now(), created: timestamp(), content: text });
+            localStorage.setItem('notes', JSON.stringify(notes));
+            alert('Anotação salva localmente. Você pode ver em "Anotações".');
+            document.getElementById('note').value = '';
+        });
+
+        document.getElementById('clearBtn').addEventListener('click', function() {
+            if (confirm('Limpar o campo?')) document.getElementById('note').value = '';
+        });
+    </script>
+</body>
+</html>

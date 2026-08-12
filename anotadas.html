@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anotações Salvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header style="padding:1rem;display:flex;gap:1rem;align-items:center;">
+        <a href="index.html">Início</a>
+        <a href="guiatelefonico.html">Guia Telefônico</a>
+        <a href="blocodenotas.html">Bloco de Notas</a>
+    </header>
+
+    <main style="padding:1rem;">
+        <h1>Anotações Salvas</h1>
+        <div id="notesContainer"></div>
+        <div style="margin-top:1rem;">
+            <button id="clearAll">Apagar todas as anotações</button>
+        </div>
+    </main>
+
+    <template id="noteTpl">
+        <div class="note-item" style="border:1px solid #ccc;padding:0.5rem;margin-bottom:0.5rem;">
+            <div class="meta" style="font-size:0.9rem;color:#555;"></div>
+            <pre style="white-space:pre-wrap;margin:0.5rem 0;"></pre>
+            <div style="display:flex;gap:0.5rem;margin-top:0.5rem;"></div>
+        </div>
+    </template>
+
+    <script>
+        function downloadText(filename, text) {
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            URL.revokeObjectURL(url);
+        }
+
+        function render() {
+            const container = document.getElementById('notesContainer');
+            container.innerHTML = '';
+            const notes = JSON.parse(localStorage.getItem('notes') || '[]');
+            if (!notes.length) {
+                container.innerHTML = '<p>Nenhuma anotação salva.</p>';
+                return;
+            }
+            notes.slice().reverse().forEach(n => {
+                const tpl = document.getElementById('noteTpl');
+                const el = tpl.content.cloneNode(true);
+                el.querySelector('.meta').textContent = 'Salvo em: ' + n.created + ' (id: ' + n.id + ')';
+                el.querySelector('pre').textContent = n.content;
+                const controls = el.querySelector('div:last-child');
+                const btnDownload = document.createElement('button'); btnDownload.textContent = 'Baixar .txt';
+                btnDownload.addEventListener('click', () => downloadText('nota-' + n.id + '.txt', n.content));
+                const btnDelete = document.createElement('button'); btnDelete.textContent = 'Apagar';
+                btnDelete.addEventListener('click', () => {
+                    if (!confirm('Apagar esta anotação?')) return;
+                    const all = JSON.parse(localStorage.getItem('notes') || '[]');
+                    const filtered = all.filter(x => x.id !== n.id);
+                    localStorage.setItem('notes', JSON.stringify(filtered));
+                    render();
+                });
+                controls.appendChild(btnDownload);
+                controls.appendChild(btnDelete);
+                container.appendChild(el);
+            });
+        }
+
+        document.getElementById('clearAll').addEventListener('click', function() {
+            if (!confirm('Apagar todas as anotações?')) return;
+            localStorage.removeItem('notes');
+            render();
+        });
+
+        render();
+    </script>
+</body>
+</html>
