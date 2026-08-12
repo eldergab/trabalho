@@ -31,5 +31,28 @@
     <footer>
         <p style="text-align:center; padding:1rem 0;">&copy; Trabalho</p>
     </footer>
+
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js').then(reg => {
+          // If there's an updated SW waiting, tell it to skip waiting
+          if (reg.waiting) {
+            reg.waiting.postMessage({ type: 'SKIP_WAITING' });
+          }
+        }).catch(err => console.warn('SW register failed:', err));
+
+        navigator.serviceWorker.addEventListener('message', (e) => {
+          if (e.data && e.data.type === 'SW_ACTIVATED') {
+            // Reload so the page uses the latest files
+            window.location.reload();
+          }
+        });
+
+        // During development/testing, force checking for updates on load
+        if (navigator.serviceWorker.getRegistrations) {
+          navigator.serviceWorker.getRegistrations().then(regs => regs.forEach(r => r.update()));
+        }
+      }
+    </script>
 </body>
 </html>
