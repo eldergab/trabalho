@@ -1,0 +1,6 @@
+body { font-family: sans-serif; background: #f4f4f9; margin: 0; padding: 20px; }
+header { text-align: center; margin-bottom: 20px; color: #333; }
+.category { background: white; padding: 15px; border-radius: 10px; margin-bottom: 15px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+h2 { font-size: 1.1rem; border-bottom: 2px solid #25D366; padding-bottom: 5px; color: #25D366; }
+button { width: 100%; padding: 15px; margin: 5px 0; border: none; border-radius: 8px; background: #25D366; color: white; font-weight: bold; font-size: 1rem; cursor: pointer; text-align: left; transition: 0.2s; }
+button:active { transform: scale(0.98); background: #128C7E; }
